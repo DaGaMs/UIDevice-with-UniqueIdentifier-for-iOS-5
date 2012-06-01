@@ -85,15 +85,18 @@
     
     NSString *stringToHash = [NSString stringWithFormat:@"%@%@",macaddress,bundleIdentifier];
     NSString *uniqueIdentifier = [stringToHash stringFromMD5];
-    
     return uniqueIdentifier;
 }
 
 - (NSString *) uniqueGlobalDeviceIdentifier{
     NSString *macaddress = [[UIDevice currentDevice] macaddress];
     NSString *uniqueIdentifier = [macaddress stringFromMD5];
-    
+#ifdef DEBUG
+    MTLog(@"WARNING: Set a fixed host id to be able to use testing library!");
+    return @"C02GD17KDJWR";
+#else    
     return uniqueIdentifier;
+#endif
 }
 
 @end
